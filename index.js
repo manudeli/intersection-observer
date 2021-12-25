@@ -3,60 +3,60 @@ const today = new Date()
 const cardContainer = document.querySelector('.card-container')
 const cards = document.querySelectorAll('.card')
 
-const observer = new IntersectionObserver(
-  (entries) =>
-    entries.forEach((entry) => {
-      entry.target.classList.toggle('show', entry.isIntersecting)
-      if (entry.isIntersecting) observer.unobserve(entry.target)
-    }),
-  { threshold: 0 }
+const observer = new IntersectionObserver((entries) =>
+  entries.forEach((entry) => {
+    entry.target.classList.toggle('show', entry.isIntersecting)
+    if (entry.isIntersecting) observer.unobserve(entry.target)
+  })
 )
 
 cards.forEach((card) => observer.observe(card))
 
-const lastCardObserver = new IntersectionObserver((entries) => {
-  const lastCard = entries[0]
-  if (!lastCard.isIntersecting) return
-  appendNewCards()
-  lastCardObserver.unobserve(lastCard.target)
-  lastCardObserver.observe(document.querySelector('.card:last-child'))
-}, {})
-lastCardObserver.observe(document.querySelector('.card:last-child'))
+initEndCardObserver('.card:last-child')
+initEndCardObserver('.card:first-child')
 
-const firstCardObserver = new IntersectionObserver(
-  (entries) => {
-    const firstCard = entries[0]
-    if (!firstCard.isIntersecting) return
-    prependNewCards()
-    firstCardObserver.unobserve(firstCard.target)
-    firstCardObserver.observe(document.querySelector('.card:first-child'))
+function initEndCardObserver(selectors) {
+  const targetObserver = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return
+    switch (selectors) {
+      case '.card:last-child':
+        newCard.append()
+        break
+      case '.card:first-child':
+        newCard.prepend()
+        break
+      default:
+        newCard.prepend()
+        break
+    }
+    targetObserver.unobserve(entry.target)
+    targetObserver.observe(document.querySelector(selectors))
+  }, {})
+  targetObserver.observe(document.querySelector(selectors))
+  return targetObserver
+}
+
+const newCard = {
+  prepend: () => {
+    const newCardDate = getDate(-getDistance.prevWithToday(), today)
+    const card = createElement('div', 'card', newCardDate.toLocaleDateString())
+    observer.observe(card)
+    cardContainer.prepend(card)
   },
-  { threshold: 0 }
-)
-firstCardObserver.observe(document.querySelector('.card:first-child'))
-
-function prependNewCards() {
-  const newCardDate = getDate(-getDistance.prevWithToday(), today)
-  const card = createElement('div', 'card', newCardDate.toLocaleDateString())
-  observer.observe(card)
-  cardContainer.prepend(card)
+  append: () => {
+    const newCardDate = getDate(getDistance.nextWithToday(), today)
+    const card = createElement('div', 'card', newCardDate.toLocaleDateString())
+    observer.observe(card)
+    cardContainer.append(card)
+  },
 }
 
-function appendNewCards() {
-  const newCardDate = getDate(getDistance.nextWithToday(), today)
-  const card = createElement('div', 'card', newCardDate.toLocaleDateString())
-  observer.observe(card)
-  cardContainer.append(card)
-}
-
-function createElement(tagName, className, textContent) {
+const createElement = (tagName, className, textContent) => {
   const card = document.createElement(tagName)
   card.textContent = textContent
   card.classList.add(className)
   return card
 }
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const getDate = (dateOffset, refDate) => {
   const targetDate = new Date(refDate)
@@ -68,6 +68,8 @@ const getDistance = {
   prevWithToday: () => getIndexToday() + 1,
   nextWithToday: () => getCurrentCards().length - getIndexToday(),
 }
+
 const getCurrentCards = () => document.querySelectorAll('.card')
+
 const getIndexToday = () =>
   Array.from(getCurrentCards()).findIndex((card) => card.id === 'today')
