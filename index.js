@@ -24,8 +24,8 @@ function initEndCardObserver(selectors) {
         newCard.append()
         break
       case '#prepend':
-        scrollTo({ top: 200 })
-        newCard.prepend()
+        const card = newCard.prepend()
+        scrollTo({ top: card.getBoundingClientRect().bottom })
         break
       default:
         newCard.prepend()
@@ -44,12 +44,14 @@ const newCard = {
     const card = createElement('div', 'card', newCardDate.toLocaleDateString())
     observer.observe(card)
     cardContainer.prepend(card)
+    return card
   },
   append: () => {
     const newCardDate = getDate(getDistance.nextWithToday(), today)
     const card = createElement('div', 'card', newCardDate.toLocaleDateString())
     observer.observe(card)
     cardContainer.append(card)
+    return card
   },
 }
 
