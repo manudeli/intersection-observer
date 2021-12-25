@@ -10,7 +10,7 @@ body {
   border: 1px solid black;
   border-radius: 0.25rem;
   padding: 0.5rem;
-  height: 100vh;
+  height: 2000px;
   opacity: 0;
   transition: 1ms;
   background: linear-gradient(45deg, #e4c1f8 0%, rgba(225, 5, 34, 0) 70%) repeat
@@ -32,4 +32,9 @@ body {
 .card.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+#today {
+  color: white;
+  background: black;
 }
