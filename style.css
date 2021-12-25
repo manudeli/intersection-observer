@@ -3,16 +3,14 @@ body {
 }
 
 .card-container {
-  height: 100vh;
+  height: 100%;
 }
 
 .card {
   border: 1px solid black;
   border-radius: 0.25rem;
   padding: 0.5rem;
-  height: 2000px;
-  opacity: 0;
-  transition: 1ms;
+  height: 1000px;
   background: linear-gradient(45deg, #e4c1f8 0%, rgba(225, 5, 34, 0) 70%) repeat
       scroll 0% 0%,
     linear-gradient(135deg, #fcf6be 10%, rgba(49, 5, 209, 0) 80%) repeat scroll
@@ -22,11 +20,13 @@ body {
     rgba(0, 0, 0, 0)
       linear-gradient(315deg, #a9ded9 100%, rgba(9, 245, 5, 0) 70%) repeat
       scroll 0% 0%;
-  transform: translateY(10px);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  transition: 100ms;
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 .card.show {
@@ -37,4 +37,9 @@ body {
 #today {
   color: white;
   background: black;
+}
+
+#prepend {
+  background: red;
+  height: 60px;
 }

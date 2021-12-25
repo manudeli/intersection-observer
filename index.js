@@ -13,16 +13,18 @@ const observer = new IntersectionObserver((entries) =>
 cards.forEach((card) => observer.observe(card))
 
 initEndCardObserver('.card:last-child')
-initEndCardObserver('.card:first-child')
+initEndCardObserver('#prepend')
 
 function initEndCardObserver(selectors) {
   const targetObserver = new IntersectionObserver(([entry]) => {
     if (!entry.isIntersecting) return
+
     switch (selectors) {
       case '.card:last-child':
         newCard.append()
         break
-      case '.card:first-child':
+      case '#prepend':
+        scrollTo({ top: 200 })
         newCard.prepend()
         break
       default:
@@ -31,7 +33,7 @@ function initEndCardObserver(selectors) {
     }
     targetObserver.unobserve(entry.target)
     targetObserver.observe(document.querySelector(selectors))
-  }, {})
+  })
   targetObserver.observe(document.querySelector(selectors))
   return targetObserver
 }
