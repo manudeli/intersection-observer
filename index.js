@@ -44,6 +44,7 @@ const newCard = {
     const card = createElement('div', 'card', newCardDate.toLocaleDateString())
     observer.observe(card)
     cardContainer.prepend(card)
+    vibrate()
     return card
   },
   append: () => {
@@ -51,6 +52,7 @@ const newCard = {
     const card = createElement('div', 'card', newCardDate.toLocaleDateString())
     observer.observe(card)
     cardContainer.append(card)
+    vibrate()
     return card
   },
 }
@@ -77,3 +79,5 @@ const getCurrentCards = () => document.querySelectorAll('.card')
 
 const getIndexToday = () =>
   Array.from(getCurrentCards()).findIndex((card) => card.id === 'today')
+
+const vibrate = () => window.navigator.vibrate(10)
