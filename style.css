@@ -4,6 +4,7 @@ body {
 
 .card-container {
   height: 100%;
+  background: black;
 }
 
 .card {
@@ -24,14 +25,15 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 30px;
-  transition: 100ms;
+  transition: 1500ms;
   opacity: 0;
-  transform: translateY(10px);
+  transform: perspective(50vw) translateZ(-30px);
+  perspective: 550px;
 }
 
 .card.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateZ(0);
 }
 
 #today {
