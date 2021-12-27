@@ -84,6 +84,6 @@ const vibrate = () => {
   try {
     window.navigator.vibrate(10)
   } catch (error) {
-    console.error('not available vibrate api')
+    console.log('not available vibrate api')
   }
 }
