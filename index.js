@@ -25,7 +25,7 @@ function initEndCardObserver(selectors) {
         break
       case '#prepend':
         const card = newCard.prepend()
-        scrollTo({ top: card.getBoundingClientRect().bottom })
+        scrollTo({ top: card.getBoundingClientRect().bottom + 100 })
         break
       default:
         newCard.prepend()
@@ -80,4 +80,10 @@ const getCurrentCards = () => document.querySelectorAll('.card')
 const getIndexToday = () =>
   Array.from(getCurrentCards()).findIndex((card) => card.id === 'today')
 
-const vibrate = () => window.navigator.vibrate(10)
+const vibrate = () => {
+  try {
+    window.navigator.vibrate(10)
+  } catch (error) {
+    console.error('not available vibrate api')
+  }
+}
