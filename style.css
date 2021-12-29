@@ -11,7 +11,9 @@ body {
 
 .card {
   box-sizing: border-box;
-  border-bottom: 4px solid black;
+  border: 0px solid black;
+  margin: 8px;
+  border-radius: 16px;
   color: black;
   padding: 0.5rem;
   height: 150px;
