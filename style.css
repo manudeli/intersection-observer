@@ -1,17 +1,20 @@
 body {
   height: 100%;
+  background: black;
+  font-family: sans-serif;
+  font-weight: 900;
 }
 
 .card-container {
   height: 100%;
-  background: black;
 }
 
 .card {
-  border: 1px solid black;
-  border-radius: 0.25rem;
+  box-sizing: border-box;
+  border-bottom: 4px solid black;
+  color: black;
   padding: 0.5rem;
-  height: 1000px;
+  height: 150px;
   background: linear-gradient(45deg, #e4c1f8 0%, rgba(225, 5, 34, 0) 70%) repeat
       scroll 0% 0%,
     linear-gradient(135deg, #fcf6be 10%, rgba(49, 5, 209, 0) 80%) repeat scroll
@@ -37,11 +40,11 @@ body {
 }
 
 #today {
+  font-size: 70px;
+  background: transparent;
   color: white;
-  background: black;
 }
 
-#prepend {
-  background: red;
-  height: 100px;
+#prepend-sensor {
+  height: 500px;
 }

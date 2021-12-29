@@ -13,7 +13,7 @@ const observer = new IntersectionObserver((entries) =>
 cards.forEach((card) => observer.observe(card))
 
 initEndCardObserver('.card:last-child')
-initEndCardObserver('#prepend')
+initEndCardObserver('#prepend-sensor')
 
 function initEndCardObserver(selectors) {
   const targetObserver = new IntersectionObserver(([entry]) => {
@@ -23,9 +23,11 @@ function initEndCardObserver(selectors) {
       case '.card:last-child':
         newCard.append()
         break
-      case '#prepend':
+      case '#prepend-sensor':
         const card = newCard.prepend()
-        scrollTo({ top: card.getBoundingClientRect().bottom + 100 })
+        scrollTo({
+          top: card.getBoundingClientRect().bottom + 500,
+        })
         break
       default:
         newCard.prepend()
